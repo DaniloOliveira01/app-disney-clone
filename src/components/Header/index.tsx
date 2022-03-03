@@ -25,7 +25,6 @@ import WatchSvg from "../../assets/image/watchlist-icon.svg"
 import OriginalSvg from "../../assets/image/original-icon.svg"
 import MoviesSvg from "../../assets/image/movie-icon.svg"
 import SerieSvg from "../../assets/image/series-icon.svg"
-import OlafProfile from "../../assets/image/olaf.png"
 
 // SERVICES
 import { auth } from "../../services/firebase";
@@ -43,7 +42,7 @@ export function Header() {
     auth.onAuthStateChanged( async (user) => {
       if(user) {
         setUser(user);
-        navigate.bind('/home')
+        navigate('/home')
       };
     });
   }, [userName]);
@@ -73,7 +72,7 @@ export function Header() {
    auth.signOut()
    .then(() => {
      dispatch(setSignOutState())
-     navigate.bind('/')
+     navigate('/')
    }).catch((error) => alert(error.message))
   }
  }
@@ -84,48 +83,42 @@ export function Header() {
         <Logo src={LogoSvg} />
       </LogoDisney>
 
-      {
-        !userName ? (
+      {!userName ? (
         <Login onClick={handleAuth}>Login</Login>
-         ) : (
-         <>
-      <NavMenu>
-        <a href="/home">
-          <img src={HomeSvg} alt="HOME" />
-          <span>HOME</span>
-        </a>
-
-        <a>
-          <img src={SearchSvg} alt="SEARCH" />
-          <span>PROCURAR</span>
-        </a>
-
-        <a>
-          <img src={WatchSvg} alt="WATCH" />
-          <span>ASSISTINDO</span>
-        </a>
-
-        <a>
-          <img src={OriginalSvg} alt="ORIGINAL" />
-          <span>ORIGINAL</span>
-        </a>
-
-        <a>
-          <img src={MoviesSvg} alt="FILMES" />
-          <span>FILMES</span>
-        </a>
-
-        <a href="#">
-          <img src={SerieSvg} alt="SÉRIES" />
-          <span>SÉRIES</span>
-        </a>
-      </NavMenu>
-        <SignOut>
-          <UserImg src={OlafProfile} alt={userName} />
-          <DropDown>
-            <span onClick={handleAuth}>Sair</span>
-          </DropDown>
-        </SignOut>
+      ) : (
+        <>
+          <NavMenu>
+            <a href="/home">
+              <img src={HomeSvg} alt="HOME" />
+              <span>HOME</span>
+            </a>
+            <a>
+              <img src={SearchSvg} alt="SEARCH" />
+              <span>SEARCH</span>
+            </a>
+            <a>
+              <img src={WatchSvg} alt="WATCHLIST" />
+              <span>WATCHLIST</span>
+            </a>
+            <a>
+              <img src={OriginalSvg} alt="ORIGINALS" />
+              <span>ORIGINALS</span>
+            </a>
+            <a>
+              <img src={MoviesSvg} alt="MOVIES" />
+              <span>MOVIES</span>
+            </a>
+            <a>
+              <img src={SerieSvg} alt="SERIES" />
+              <span>SERIES</span>
+            </a>
+          </NavMenu>
+          <SignOut>
+            <UserImg src={userPhoto} alt={userName} />
+            <DropDown>
+              <span onClick={handleAuth}>Sair</span>
+            </DropDown>
+          </SignOut>
         </>
       )}
     </Nav> 

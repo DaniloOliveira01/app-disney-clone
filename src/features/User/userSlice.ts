@@ -7,6 +7,12 @@ export const initialState = {
   photo: "",
 };
 
+interface UserDetail {
+  name: string;
+  email: string;
+  photo: string;
+}
+
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -18,17 +24,17 @@ const userSlice = createSlice({
     },
 
     setSignOutState: state => {
-      state.name = null;
-      state.email = null;
-      state.photo = null;
+      state.name = "";
+      state.email = "";
+      state.photo = "";
     },
   },
 });
 
 export const { setUserLoginDetails, setSignOutState } = userSlice.actions;
 
-export const selectUserName = (state)  => state.user.name;
-export const selectUserEmail = (state) => state.user.email;
-export const selectUserPhoto = (state) => state.user.photo;
+export const selectUserName = (state: { user: { name: any; }; })  => state.user.name;
+export const selectUserEmail = (state: { user: { email: any; }; }) => state.user.email;
+export const selectUserPhoto = (state: { user: { photo: any; }; }) => state.user.photo;
 
 export default userSlice.reducer;
